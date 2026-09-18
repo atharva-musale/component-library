@@ -1,0 +1,79 @@
+.ama-listbox-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+  background: #ffffff;
+  overflow: hidden;
+  height: 100%;
+}
+
+.ama-listbox-container.ama-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+.ama-listbox-filter {
+  box-sizing: border-box;
+  margin: 0.5rem;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+}
+
+.ama-listbox-viewport {
+  overflow-y: auto;
+  outline: none;
+}
+
+.ama-listbox-spacer {
+  position: relative;
+}
+
+.ama-listbox-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  overflow-y: auto;
+  outline: none;
+}
+
+.ama-listbox-list-virtual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ama-listbox-item {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.ama-listbox-item {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  user-select: none;
+
+}
+.ama-listbox-item:hover {
+  background: #f5f5f5;
+}
+
+.ama-listbox-item.ama-highlight {
+  background: #326ec8;
+  color: white;
+}
+
+.ama-listbox-item.ama-focus {
+  outline: 2px solid #326ec8;
+  outline-offset: -2px;
+}
+
+.ama-listbox-empty {
+  padding: 0.5rem 0.75rem;
+  color: #818181;
+}

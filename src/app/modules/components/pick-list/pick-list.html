@@ -1,0 +1,50 @@
+<div class="ama-pick-list" [formGroup]="pickListForm">
+  @if (rightTitle() || leftTitle()) {
+    <h3 class="ama-picklist-header">{{ leftTitle() }}</h3>
+    <div></div>
+    <h3 class="ama-picklist-header">{{ rightTitle() }}</h3>
+  }
+  <div class="ama-pick-list-container">
+    <app-list-box
+      [options]="getLeftListControl().value"
+      formControlName="sourceSelection"
+      (onFilter)="onLeftFilter($event)"
+      [multiple]="true"
+      [filter]="showFilter()"
+      filterPlaceHolder="Filter"
+      [optionLabel]="optionLabel()"
+      [optionValue]="optionValue()"
+      [disabled]="pickListForm.disabled || disabled()"
+      [emptyMessage]="leftEmptyMessage()"
+      [virtualScroll]="virtualScroll()"
+      [virtualScrollItemSize]="virtualScrollItemSize()"
+      [scrollHeight]="scrollHeight()">
+    </app-list-box>
+  </div>
+
+  @let disableLeft = getLeftListControl().value?.length === 0 || this.pickListForm.disabled || disabled();
+  @let disableRight = getRightListControl().value?.length === 0 || this.pickListForm.disabled || disabled();
+
+  <div class="ama-button-list">
+    <button class="blue-circle-btn" (click)="moveAllToRight()" [disabled]="disableLeft" aria-label="Move all to right"> >> </button>
+    <button class="blue-circle-btn" (click)="moveToRight()" [disabled]="disableLeft" aria-label="Move to right"> > </button>
+    <button class="blue-circle-btn" (click)="moveToLeft()" [disabled]="disableRight" aria-label="Move to left"> < </button>
+    <button class="blue-circle-btn" (click)="moveAllToLeft()" [disabled]="disableRight" aria-label="Move all to left"> << </button>
+  </div>
+  <div class="ama-pick-list-container">
+    <app-list-box formControlName="targetSelection"
+      [options]="getRightListControl().value"
+      [multiple]="true"
+      [filter]="showFilter()"
+      [filterPlaceHolder]="'Filter'"
+      [optionLabel]="optionLabel()"
+      [optionValue]="optionValue()"
+      [disabled]="pickListForm.disabled || disabled()"
+      [emptyMessage]="rightEmptyMessage()"
+      [virtualScroll]="virtualScroll()"
+      [virtualScrollItemSize]="virtualScrollItemSize()"
+      [scrollHeight]="scrollHeight()"
+      (onFilter)="onRightFilter($event)">
+    </app-list-box>
+  </div>
+</div>

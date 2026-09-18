@@ -1,0 +1,63 @@
+<div class="ama-listbox-container" [class.ama-disabled]="disabled()">
+  @if (filter()) {
+    <input class="ama-listbox-filter" type="text"
+      [placeholder]="filterPlaceHolder()"
+      [formControl]="filterControl"
+    />
+  }
+
+  @if (virtualScroll()) {
+    @if (filteredOptions().length === 0) {
+      <p class="ama-listbox-empty">{{ emptyMessage() }}</p>
+    } @else {
+    <div #viewport class="ama-listbox-viewport" role="listbox"
+      tabindex="0"
+      [attr.aria-multiselectable]="multiple()"
+      [attr.aria-disabled]="disabled()"
+      [style.height]="scrollHeight()"
+      (scroll)="onScroll($event)"
+      (keydown)="onKeyDown($event)"
+    >
+      <div class="ama-listbox-spacer" [style.height.px]="totalHeight()">
+        <ul class="ama-listbox-list ama-listbox-list-virtual" [style.transform]="'translateY(' + offsetY() + 'px)'">
+          @for (item of visibleItems(); track item.index) {
+            <li class="ama-listbox-item" role="option" tabindex="0"
+              [style.height.px]="virtualScrollItemSize()"
+              [class.ama-highlight]="isSelected(item.option)"
+              [class.ama-focus]="focusedIndex() === item.index"
+              [attr.aria-selected]="isSelected(item.option)"
+              [attr.aria-setsize]="filteredOptions().length"
+              [attr.aria-posinset]="item.index + 1"
+              (click)="selectOption(item.option, $event)"
+              (keydown)="onKeyDown($event)"
+            >
+              {{ getOptionLabel(item.option) }}
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+    }
+  } @else {
+    <ul class="ama-listbox-list" role="listbox" tabindex="0"
+      [attr.aria-multiselectable]="multiple()"
+      [attr.aria-disabled]="disabled()"
+      [style]="listStyle()"
+      (keydown)="onKeyDown($event)"
+    >
+      @for (option of filteredOptions(); track option; let i = $index) {
+        <li class="ama-listbox-item" role="option" tabindex="0"
+          [class.ama-highlight]="isSelected(option)"
+          [class.ama-focus]="focusedIndex() === i"
+          [attr.aria-selected]="isSelected(option)"
+          (click)="selectOption(option, $event)"
+          (keydown)="onKeyDown($event)"
+        >
+          {{ getOptionLabel(option) }}
+        </li>
+      } @empty {
+        <li class="ama-listbox-empty">{{ emptyMessage() }}</li>
+      }
+    </ul>
+  }
+</div>

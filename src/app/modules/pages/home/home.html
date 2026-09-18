@@ -1,0 +1,32 @@
+<form [formGroup]="form">
+  <div class="container select-items">
+    <h3>List of Items</h3>
+    <app-list-box id="itemsList1"
+      [options]="items"
+      optionLabel="name"
+      [filter]="true"
+      [multiple]="true"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="40"
+      scrollHeight="400px"
+      formControlName="selectedItems">
+    </app-list-box>
+  </div>
+
+  <div class="picklist-container container">
+    <h3>Select items using picklist instead</h3>
+    <app-pick-list
+      [allItems]="items"
+      optionLabel="name"
+      leftTitle="Available"
+      rightTitle="Selected"
+      leftEmptyMessage="No items available"
+      rightEmptyMessage="No items selected"
+      [showFilter]="true"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="40"
+      scrollHeight="400px"
+      formControlName="pickedItems">
+    </app-pick-list>
+  </div>
+</form>

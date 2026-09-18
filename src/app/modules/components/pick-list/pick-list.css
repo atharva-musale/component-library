@@ -1,0 +1,29 @@
+.ama-pick-list {
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  height: auto;
+}
+
+.ama-button-list {
+  align-self: center;
+  justify-self: center;
+  display: grid;
+  justify-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem;
+}
+
+.ama-pick-list-container {
+  height: 35rem;
+}
+
+.ama-picklist-header {
+  padding: 1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+app-aem-listbox {
+  display: block;
+  height: 100%;
+}
